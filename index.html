@@ -3,27 +3,79 @@
 <head>
   <title>Çalışma ve İstirahat Günleri</title>
   <meta charset="UTF-8">
+  <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+    
+
+    body {
+      background-image: "../images/bg.jpg";
+      text-align:center; 
+	    position:absolute; 
+	    top:0; 
+	    left:0; 
+	    width:100%; 
+	    height:100%; 
+      font-family: 'Kalam', cursive;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+
+    }
+    .container {
+      text-align: center;
+    }
+    .container_element {
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0;
+    }
+    h2 {
+      margin: 0;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    footer {
+      font-size: 10px;
+      font-family: arial;
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+    
+    }
+
+  </style>
   <script>
     function calculateWorkingDays(startDate, endDate) {
       var currentDate = new Date(startDate);
       var end = new Date(endDate);
       var dayCount = 1;
-      var output = "";
+      var table = "<table><tr><th>Tarih</th><th>Gün Durumu</th></tr>";
       
       while (currentDate <= end) {
         var dayOfWeek = currentDate.getDay();
+        var dayStatus = (dayCount % 3 !== 0) ? "Çalışma" : "İstirahat";
         
-        if ((dayCount % 3) !== 0) {
-          output += currentDate.toDateString() + " - Çalışma<br>";
-        } else {
-          output += currentDate.toDateString() + " - İstirahat<br>";
-        }
+        table += "<tr><td>" +currentDate.toLocaleDateString("tr-TR")+" - " +currentDate.toLocaleDateString("tr-TR", {weekday:"long"}) + "</td><td>" + dayStatus + "</td></tr>";
         
         currentDate.setDate(currentDate.getDate() + 1);
         dayCount++;
       }
       
-      document.getElementById("result").innerHTML = output;
+      table += "</table>";
+      document.getElementById("result").innerHTML = table;
     }
     
     function calculateDays() {
@@ -35,16 +87,38 @@
   </script>
 </head>
 <body>
-  <h1>Çalışma ve İstirahat Günleri</h1>
+  <div class="container">
+
+    <div class="container_element">
+      <h2>2+1 Çalışma Sistemi</h2>
+      <h1>Çalışma ve İstirahat Günleri</h1>
+    </div>
+    
+
+    <div class="container_element">
+      <label for="startDate">Başlangıç Tarihi:</label>
+      <input type="date" id="startDate">
+    
+      <label for="endDate">Bitiş Tarihi:</label>
+      <input type="date" id="endDate">
+    
+      
+
+    </div>
+    <div class="container_element">
+      <button onclick="calculateDays()">Hesapla</button>
+    </div>
+    
+    
+    
+    <div id="result"></div>
+
+  </div>
   
-  <label for="startDate">Başlangıç Tarihi:</label>
-  <input type="date" id="startDate">
+  <footer>
+    <p>2023 Ahmet Hakan Dinger</p>
+  </footer>
   
-  <label for="endDate">Bitiş Tarihi:</label>
-  <input type="date" id="endDate">
-  
-  <button onclick="calculateDays()">Hesapla</button>
-  
-  <div id="result"></div>
 </body>
+
 </html>

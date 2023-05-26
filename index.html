@@ -69,7 +69,11 @@
       
       while (currentDate <= end) {
         var dayOfWeek = currentDate.getDay();
-        var dayStatus = (dayCount % 3 !== 0) ? "Çalışma" : "İstirahat";
+        var dayStatus = (dayCount % 3 !== 0) ? "Görev" : "İstirahat";
+        
+        if (dayCount % 3 === 2) {
+          dayStatus = "Destek";
+        }
         
         table += "<tr><td>" +currentDate.toLocaleDateString("tr-TR")+" - " +currentDate.toLocaleDateString("tr-TR", {weekday:"long"}) + "</td><td>" + dayStatus + "</td></tr>";
         

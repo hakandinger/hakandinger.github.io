@@ -25,6 +25,13 @@
       
       document.getElementById("result").innerHTML = output;
     }
+    
+    function calculateDays() {
+      var startDate = document.getElementById("startDate").value;
+      var endDate = document.getElementById("endDate").value;
+      
+      calculateWorkingDays(startDate, endDate);
+    }
   </script>
 </head>
 <body>

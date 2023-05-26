@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Çalışma ve İstirahat Günleri</title>
+  <meta charset="UTF-8">
+  <script>
+    function calculateWorkingDays(startDate, endDate) {
+      var currentDate = new Date(startDate);
+      var end = new Date(endDate);
+      var dayCount = 1;
+      var output = "";
+      
+      while (currentDate <= end) {
+        var dayOfWeek = currentDate.getDay();
+        
+        if ((dayCount % 3) !== 0) {
+          output += currentDate.toDateString() + " - Çalışma<br>";
+        } else {
+          output += currentDate.toDateString() + " - İstirahat<br>";
+        }
+        
+        currentDate.setDate(currentDate.getDate() + 1);
+        dayCount++;
+      }
+      
+      document.getElementById("result").innerHTML = output;
+    }
+  </script>
+</head>
+<body>
+  <h1>Çalışma ve İstirahat Günleri</h1>
+  
+  <label for="startDate">Başlangıç Tarihi:</label>
+  <input type="date" id="startDate">
+  
+  <label for="endDate">Bitiş Tarihi:</label>
+  <input type="date" id="endDate">
+  
+  <button onclick="calculateDays()">Hesapla</button>
+  
+  <div id="result"></div>
+</body>
+</html>

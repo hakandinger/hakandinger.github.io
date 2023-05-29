@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Günlük Çizelge Hazırlayıcı</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+        body {
+            font-family: 'Kalam', cursive;
+            background-color: #cdcccd;
+            background-image: url(bg.jpg);
+            background-repeat: no-repeat;
+            background-position: center 80%;
+        }
+
+        .container {
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-size: 24px;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+
+        
+        .input {
+            text-align: center;
+            margin: 0 5%;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            height: 50px;
+        }
+
+        .submit {
+            text-align: center;
+            font-size: 24px;
+            margin: 30px 5%;
+            width: 90%;
+            max-width: 500px;
+            height: 50px;
+        }
+
+        
+
+        @media only screen and (max-width: 1024px) {
+            
+
+            .input {
+                font-size: 40px;
+                max-width: 90%;
+                height: 100px;
+                margin: 0;
+            }
+
+            .submit {
+                font-size: 40px;
+                max-width: 90%;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <p>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu Sayfaları Hazırladım.</p>
+        <br>
+        <button onclick="ikiartibir()" class="submit">2+1 Çalışma Takvimi</button>
+        <br>
+        <button onclick="onikiotuzalti()" class="submit">Çakma 12/36 Çalışma Takvimi</button>
+        <br>
+    </div>
+
+    <script>
+        function ikiartibir() {
+            window.open("ikiartibir.html");
+        }
+
+        function onikiotuzalti() {
+            window.open("onikiotuzalti.html");
+        }
+    </script>
+  
+    
+</body>
+
+</html>

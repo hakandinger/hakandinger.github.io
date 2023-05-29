@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>15 Günlük Çizelge</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+        body {
+            font-family: 'Kalam', cursive;
+            background-color: #cdcccd;
+            background-image: url(bg.jpg);
+            background-repeat: no-repeat;
+            background-position: center 80%;
+        }
+
+        .container {
+            text-align: center;
+            display: block;
+            width: 100%;
+            font-size: 24px;
+            margin-top: 80px;
+            margin-bottom: 60px;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        .input {
+            text-align: center;
+            margin: 0 5%;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            height: 50px;
+        }
+
+        .submit {
+            text-align: center;
+            font-size: 24px;
+            margin: 30px 5%;
+            width: 90%;
+            max-width: 500px;
+            height: 50px;
+        }
+
+        
+
+        @media only screen and (max-width: 1024px) {
+            
+
+            .input {
+                font-size: 40px;
+                max-width: 90%;
+                height: 100px;
+                margin: 0;
+            }
+
+            .submit {
+                font-size: 40px;
+                max-width: 90%;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <p>Başlangıç Tarihi</p>
+        <input type="date" id="startDate" class="input">
+        <br>
+        <button onclick="updateTable()" class="submit">Hesapla</button>
+        <br>
+        <p>Başlangıç Tarihinden itibaren 15 günlük bir tablo hazırlamaktadır!</p>
+        <br>
+        <button onclick="downloadTable()" class="submit">Tabloyu İndir</button>
+        <br>
+    </div>
+    <table id="dataTable">
+        <tr>
+            <th>Gün</th>
+            <th>Tarih</th>
+            <th>1. Grup</th>
+            <th>2. Grup</th>
+            <th>3. Grup</th>
+        </tr>
+    </table>
+        <!-- Günlerin tekrarlanan satırları -->
+        <script>
+            function updateTable() {
+                const startDateInput = document.getElementById('startDate');
+                const startDate = new Date(startDateInput.value);
+                const table = document.querySelector('table');
+
+                // Önceki tabloyu temizle
+                while (table.rows.length > 1) {
+                    table.deleteRow(1);
+                }
+
+                for (let i = 1; i <= 15; i++) {
+                    const currentDate = new Date(startDate);
+                    currentDate.setDate(startDate.getDate() + i - 1);
+                    const day = currentDate.getDate();
+                    const month = currentDate.getMonth() + 1;
+                    const year = currentDate.getFullYear();
+                    const formattedDate = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+
+                    const row = document.createElement('tr');
+                    const dayCell = document.createElement('td');
+                    const dateCell = document.createElement('td');
+                    const group1Cell = document.createElement('td');
+                    const group2Cell = document.createElement('td');
+                    const group3Cell = document.createElement('td');
+
+                    dayCell.textContent = i;
+                    dateCell.textContent = formattedDate;
+
+                    if (i <= 5) {
+                        if (i % 7 === 1 || i % 7 === 2 || i % 7 === 3 || i % 7 === 4 || i % 7 === 5) {
+                            group1Cell.textContent = '08:00-20:00';
+                        } else {
+                            group1Cell.textContent = '20:00-08:00';
+                        }
+                    } else if (i >= 6 && i <= 15) {
+                        if ((i - 6) % 2 === 0) {
+                            group1Cell.textContent = '20:00-08:00';
+                        } else {
+                            group1Cell.textContent = 'İstirahat';
+                        }
+                    }
+
+                    if (i % 5 === 1 || i % 5 === 3 || i % 5 === 0) {
+                        group2Cell.textContent = 'İstirahat';
+                    } else {
+                        group2Cell.textContent = '20:00-08:00';
+                    }
+                    if (i >= 6 && i <= 10) {
+                        group2Cell.textContent = '08:00-20:00';
+                    }
+
+                    if (i <= 10) {
+                        if ((i - 10) % 2 === 0) {
+                            group3Cell.textContent = 'İstirahat';
+                        } else {
+                            group3Cell.textContent = '20:00-08:00';
+                        }
+                    }
+                    if (i > 10 && i <= 15) {
+                        group3Cell.textContent = '08:00-20:00';
+                    }
+
+                    row.appendChild(dayCell);
+                    row.appendChild(dateCell);
+                    row.appendChild(group1Cell);
+                    row.appendChild(group2Cell);
+                    row.appendChild(group3Cell);
+
+                    table.appendChild(row);
+                }
+            }
+            function downloadTable() {
+            const table = document.getElementById('dataTable');
+            const rows = table.querySelectorAll('tr');
+            let csvContent = '';
+
+            for (const row of rows) {
+                const cells = row.querySelectorAll('th, td');
+                const cellData = Array.from(cells).map(cell => cell.textContent);
+                const csvRow = cellData.join(',');
+                csvContent += csvRow + '\n';
+            }
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'onikiotuzaltı.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        </script>
+    
+</body>
+
+</html>

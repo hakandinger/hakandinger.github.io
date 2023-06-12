@@ -9,9 +9,24 @@
         body {
             font-family: 'Kalam', cursive;
             background-color: #cdcccd;
-            background-image: url(../images/bg.jpg);
+            
             
         }
+        .container-wrap {
+          overflow: hidden;
+          position: relative;
+        }
+
+        .container-bg {
+          opacity: 0.6;
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: auto;
+        }
+
+        
 
         .container {
             text-align: center;
@@ -64,19 +79,21 @@
 </head>
 
 <body>
-
-    <div class="container">
-        <p>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu Sayfaları Hazırladım.</p>
-        <br>
-        <button onclick="ikiartibir()" class="submit">2+1 Çalışma Takvimi</button>
-        <br>
-        <button onclick="onikiotuzalti()" class="submit">Çakma 12/36 Çalışma Takvimi</button>
-        <br>
-        <button  class="submit">8/24 Çalışma Takvimi</button>
-        <br>
-        <button  class="submit">İzin Günü Hesaplama</button>
-        <br>
-    </div>
+    <div class="container-wrap">
+        <img class="container-bg" src="../images/bg.jpg" alt="">
+        <div class="container">
+            <p>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu Sayfaları Hazırladım.</p>
+            <br>
+            <button onclick="ikiartibir()" class="submit">2+1 Çalışma Takvimi</button>
+            <br>
+            <button onclick="onikiotuzalti()" class="submit">Çakma 12/36 Çalışma Takvimi</button>
+            <br>
+            <button  class="submit">8/24 Çalışma Takvimi</button>
+            <br>
+            <button  class="submit">İzin Günü Hesaplama</button>
+            <br>
+        </div>
+       </div> 
 
     <script>
         function ikiartibir() {

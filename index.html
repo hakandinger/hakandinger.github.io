@@ -1,111 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
     <title>Günlük Çizelge Hazırlayıcı</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
-
-        body {
-            font-family: 'Kalam', cursive;
-            background-color: #cdcccd;
-            
-            
-        }
-        .container-wrap {
-          overflow: hidden;
-          position: relative;
-          background-image =url('../images/bg.jpg');
-          background-repeat: no-repeat;
-          background-position: center 80%;
-        }
-
-        .container-bg {
-          opacity: 0.6;
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 100%;
-          height: auto;
-        }
-
-        
-
-        .container {
-            text-align: center;
-            display: block;
-            width: 100%;
-            font-size: 24px;
-            margin-top: 0;
-            margin-bottom: 0;
-            font-weight: bold;
-            position: relative;
-        }
-
-        
-       
-        .submit {
-            background: linear-gradient(to right,#bebfc2 ,#949292);
-            transition: box-shadow 0.25s;
-            border-radius: 6px;
-            text-align: center;
-            font-size: 24px;
-            font-family: Trebuchet MS;
-            font-style: normal;
-            margin: 30px 5%;
-            width: 90%;
-            max-width: 500px;
-            height: 50px;
-            box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
-            border: none;
-        }
-        
-        .submit:hover {
-            background: #8c8c8c;
-            text-decoration: none;
-        }
-
-        
-        @media (max-width: 768px) {
-        
-        
-            .container{
-                width: 50%;
-                
-               
-            }                 
-        }        
-
-        @media only screen and (max-width: 1024px) {
-            
-
-            
-
-            .submit {
-                font-size: 40px;
-                max-width: 90%;
-                height: 100px;
-            }
-        }
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     </style>
 </head>
 
 <body>
-    <div class="container-wrap">
-            <div class="container">
-            <p>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu Sayfaları Hazırladım.</p>
-            <br>
-            <button onclick="ikiartibir()" class="submit">2+1 Çalışma Takvimi</button>
-            <br>
-            <button onclick="onikiotuzalti()" class="submit">3 Gruplu 12/36 Çalışma Takvimi</button>
-            <br>
-            <button  class="submit">8/24 Çalışma Takvimi</button>
-            <br>
-            <button onclick="yillikizin()" class="submit">İzin Günü Hesaplama</button>
-            <br>
-        </div>
-       </div> 
+    <div class="bg-image" 
+    style="background-image: url('../Downloads/bg.jpg');
+           height: 100vh">
+    <div class="container text-center">
+        <h1>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu
+            Sayfaları Hazırladım.</h1>
+        <hr class="border border-primary border-3 opacity-75">
+        <div class="row align-items-end">
 
+            <div class="col">
+                <div class="d-grid gap-2 col-6 mx-auto">
+                    <button onclick="ikiartibir()" type="button" class="btn btn-success btn-block">3 Gruplu 2+1 Çalışma
+                        Takvimi</button>
+                    <button type="button" class="btn btn-success btn-block">8/24 Çalışma Takvimi</button>
+
+                </div>
+
+
+            </div>
+            <div class="col">
+                <div class="d-grid gap-2 col-6 mx-auto">
+
+                    <button onclick="onikiotuzalti()" type="button" class="btn btn-success btn-block">3 Gruplu 12/36
+                        Çalışma Takvimi</button>
+                    <button onclick="yillikizin()" type="button" class="btn btn-success btn-block">Yıllık İzin Günü
+                        Hesaplama</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
     <script>
         function ikiartibir() {
             window.open("ikiartibir.html");

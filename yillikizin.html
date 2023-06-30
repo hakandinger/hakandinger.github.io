@@ -13,66 +13,43 @@
         }
     </style>
 </head>
-
 <body>
     <div class="bg-image" style="background-image: url('../Downloads/bg4.jpg');
            height: 100vh">
-
-
         <div class="container text-center p-3">
             <div class="row align-items-center mt-5 p-3">
                 <h1>Yıllık İzin Hesaplama Robotu</h1>
                 <hr class="border border-primary border-3 opacity-75">
                 <br>
                 <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
-                    <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz! </label>
-                  </div>    
-               
+                    <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
+                </div>           
             </div>
-
             <div class="row align-items-end">
-
-                
-
                 <div class="col">
                     <div class="d-grid gap-2 col-6 mx-auto">
                         <form class="row g-3" onsubmit="event.preventDefault(); updateTable();">
-                            <div class="mb-3">
-        
+                            <div class="mb-3">        
                                 <input type="date" class="form-control" id="startDate" placeholder="İzin Başlangıç Tarihi">
                             </div>
-                            <div class="mb-3">
-        
+                            <div class="mb-3">      
                                 <input type="text" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
                             </div>
                             <div class="mb-3">
                                 <button onclick="updateTable()" type="submit" class="btn btn-primary mb-3">Hesapla</button>
                             </div>
                         </form>
-
                         <table class="table" id="dataTable">
                             <tr>
                                 <th>Gün</th>
-                                <th>Tarih</th>
-        
+                                <th>Tarih</th>      
                             </tr>
                         </table>
-
-
                     </div>
-
-
                 </div>
-
-
             </div>
-
         </div>
-
-
-
     </div>
-
     <script>
         function updateTable() {
             const startDateInput = document.getElementById('startDate');
@@ -97,7 +74,6 @@
                 const dayCell = document.createElement('td');
                 const dateCell = document.createElement('td');
 
-
                 dayCell.textContent = i;
                 dateCell.textContent = formattedDate;
                 if (i === daysInput) {
@@ -107,42 +83,27 @@
                     const startMonth = startDate.getMonth() + 1;
                     const startYear = startDate.getFullYear();
                     const formattedStartDate = `${startDay < 10 ? '0' + startDay : startDay}.${startMonth < 10 ? '0' + startMonth : startMonth}.${startYear}`;
-
-
-
+                  
                     const resultText = document.createTextNode(`Göreve Başlama Tarihiniz: ${formattedStartDate}`);
                     resultLabel.textContent = '';
                     resultLabel.appendChild(resultText);
                 }
-
-
                 row.appendChild(dayCell);
                 row.appendChild(dateCell);
-
-
-
-
                 table.appendChild(row);
             }
         }
-
-
     </script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous"></script>
-                <script>
+        crossorigin="anonymous">      
+    </script>
+    <script>
                     window.dataLayer = window.dataLayer || [];
                     function gtag() { dataLayer.push(arguments); }
                     gtag('js', new Date());
 
                     gtag('config', 'G-DWJSM9FJ7L');
-                </script>
-            
-      
-
-
+    </script>   
 </body>
-
 </html>

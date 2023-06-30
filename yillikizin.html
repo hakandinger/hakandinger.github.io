@@ -16,38 +16,39 @@
 <body>
     <div class="bg-image" style="background-image: url('../images/bg4.jpg');
            height: 100vh">
-        <div class="container text-center p-3">
-            <div class="row align-items-center mt-5 p-3">
-                <h1>Yıllık İzin Hesaplama Robotu</h1>
-                <hr class="border border-primary border-3 opacity-75">
-                <br>
-                <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
-                    <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
-                </div>           
-            </div>
-            <div class="row align-items-end">
-                <div class="col">
-                    <div class="d-grid gap-2 col-6 mx-auto">
-                        <form class="row g-3" onsubmit="event.preventDefault(); updateTable();">
-                            <div class="mb-3">        
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" id="startDate">
-                                    <label>İzin Başlangıç Tarihi</label>
+            <div class="container text-center p-3">
+                <div class="row align-items-center mt-5 p-3">
+                    <h1>Yıllık İzin Hesaplama Robotu</h1>
+                    <hr class="border border-primary border-3 opacity-75">
+                    <br>
+                    <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
+                        <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
+                    </div>           
+                </div>
+                <div class="row align-items-end">
+                    <div class="col">
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <form class="row g-3" onsubmit="event.preventDefault(); updateTable();">
+                                <div class="mb-3">        
+                                    <div class="form-floating">
+                                        <input type="date" class="form-control" id="startDate">
+                                        <label>İzin Başlangıç Tarihi</label>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="mb-3">      
-                                <input type="text" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
-                            </div>
-                            <div class="mb-3">
-                                <button onclick="updateTable()" type="submit" class="btn btn-primary mb-3">Hesapla</button>
-                            </div>
-                        </form>
-                        <table class="table" id="dataTable">
-                            <tr>
-                                <th>Gün</th>
-                                <th>Tarih</th>      
-                            </tr>
-                        </table>
+                                <div class="mb-3">      
+                                    <input type="text" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
+                                </div>
+                                <div class="mb-3">
+                                    <button onclick="updateTable()" type="submit" class="btn btn-primary mb-3">Hesapla</button>
+                                </div>
+                             </form>
+                             <table class="table" id="dataTable">
+                                <tr>
+                                    <th>Gün</th>
+                                    <th>Tarih</th>      
+                                </tr>
+                             </table>
+                        </div>
                     </div>
                 </div>
             </div>

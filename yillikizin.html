@@ -12,6 +12,20 @@
             font-family: 'Kalam', cursive;
         }
     </style>
+
+ <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
 </head>
 <body>
     <div class="bg-image" style="background-image: url('../images/bg.jpg');
@@ -42,6 +56,8 @@
                                     <button onclick="updateTable()" type="submit" class="btn btn-primary mb-3">Hesapla</button>
                                 </div>
                              </form>
+
+<div id='calendar'></div>
                              <table class="table" id="dataTable">
                                 <tr>
                                     <th>Gün</th>

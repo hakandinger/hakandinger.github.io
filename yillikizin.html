@@ -86,6 +86,12 @@ events: [
         function updateTable() {
             const startDateInput = document.getElementById('startDate');
             const startDate = new Date(startDateInput.value);
+
+calendar.addEvent({
+        title: 'My Event',
+        start: startDate,
+        color: 'red' // Set the event color to red
+      });
             var daysInput = parseInt(document.getElementById('daysInput').value);
             const table = document.getElementById('dataTable');
             const resultLabel = document.getElementById('resultLabel');

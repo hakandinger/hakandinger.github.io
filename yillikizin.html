@@ -25,7 +25,12 @@
 
 initialView: 'dayGridMonth',
           locale: 'tr',
-          firstDay: 1,        });
+          firstDay: 1,      
+events: [
+    {
+      start: startDateInput,      end: formattedDate,
+      color: 'red'
+    }  });
         calendar.render();
       });
 

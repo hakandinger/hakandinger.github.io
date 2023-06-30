@@ -28,7 +28,7 @@ initialView: 'dayGridMonth',
           firstDay: 1,      
 events: [
     {
-      start: document.getElementById('startDate').value,      end: '2023-12-30',
+      start: '2023-07-01',      end: '2023-12-30',
       color: 'red'
     }  ]
 });
@@ -87,11 +87,6 @@ events: [
             const startDateInput = document.getElementById('startDate');
             const startDate = new Date(startDateInput.value);
 
-calendar.addEvent({
-        title: 'My Event',
-        start: startDate,
-        color: 'red' // Set the event color to red
-      });
             var daysInput = parseInt(document.getElementById('daysInput').value);
             const table = document.getElementById('dataTable');
             const resultLabel = document.getElementById('resultLabel');

@@ -26,11 +26,6 @@
 initialView: 'dayGridMonth',
           locale: 'tr',
           firstDay: 1,      
-events: [
-    {
-      start: '2023-07-01',      end: '2023-12-30',
-      color: 'red'
-    }  ],
 contentHeight: 450,
             headerToolbar: {
                 start: 'prev',
@@ -40,6 +35,20 @@ contentHeight: 450,
 });
         calendar.render();
       });
+
+function addEvent() {
+        var startDateInput = document.getElementById('startDate').value;
+        var endDateInput = document.getElementById('endDate').value;
+
+        var calendarEl = document.getElementById('calendar');
+        var calendar = calendarEl.calendar;
+
+        calendar.addEvent({
+            start: startDateInput,
+            end: '2023-12-30',
+            color: 'red'
+        });
+    }
 
     </script>
 </head>
@@ -136,6 +145,9 @@ contentHeight: 450,
                 table.appendChild(row);
             }
         }
+
+
+addEvent();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"

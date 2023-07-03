@@ -7,115 +7,61 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
-        body{
+        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+
+        body {
             font-family: 'Kalam', cursive;
         }
     </style>
-
- <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js'></script>
-
-
-    <script src='fullcalendar/core/locales-all.global.js'></script>    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-
-initialView: 'dayGridMonth',
-          locale: 'tr',
-          firstDay: 1,      
-contentHeight: 450,
-            headerToolbar: {
-                start: 'prev',
-                center: 'title',
-                end: 'next'
-            }
-});
-        calendar.render();
-      });
-
-function addEvent() {
-        var startDateInput = document.getElementById('startDate').value;
-        var endDateInput = document.getElementById('endDate').value;
-
-        var calendarEl = document.getElementById('calendar');
-        var calendar = calendarEl.calendar;
-
-        calendar.addEvent({
-            start: startDateInput,
-            end: '2023-12-30',
-            color: 'red'
-        });
-
-        calendar.render();
-    }
-
-    </script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales-all.global.js'></script>   
 </head>
+
 <body>
     <div class="bg-image" style="background-image: url('../images/bg.jpg');
            height: 100vh">
-            <div class="container text-center p-3">
-                <div class="row align-items-center mt-5 p-3">
-                    <h1>Yıllık İzin Hesaplama Robotu</h1>
-
-
-                    <hr class="border border-primary border-3 opacity-75">
-
-
-
-                    
-                    <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
-                        <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
-                    </div>           
+        <div class="container text-center p-3">
+            <div class="row align-items-center mt-5 p-3">
+                <h1>Yıllık İzin Hesaplama Robotu</h1>
+                <hr class="border border-primary border-3 opacity-75">
+                <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
+                    <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
                 </div>
-                <div class="row align-items-end">
-                    <div class="col">
-                        <div class="d-grid gap-2 col-6 mx-auto">
-                            <form class="row g-3" onsubmit="event.preventDefault(); updateTable();">
-                                <div class="mb-3">        
-                                    <div class="form-floating">
-                                        <input type="date" class="form-control" id="startDate">
-                                        <label>İzin Başlangıç Tarihi</label>
-                                    </div>
+            </div>
+            <div class="row align-items-end">
+                <div class="col">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+                        <form class="row g-3" onsubmit="event.preventDefault(); ">
+                            <div class="mb-3">
+                                <div class="form-floating">
+                                    <input type="date" class="form-control" id="startDate">
+                                    <label>İzin Başlangıç Tarihi</label>
                                 </div>
-                                <div class="mb-3">      
-                                    <input type="number" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
-                                </div>
-                                <div class="mb-3">
-                                    <button onclick="updateTable()" type="submit" class="btn btn-primary mb-3">Hesapla</button>
-                                </div>
-                             </form>
-
-
-                             <table class="table" id="dataTable">
-                                <tr>
-                                    <th>Gün</th>
-                                    <th>Tarih</th>      
-                                </tr>
-                             </table>
-                        </div>
+                            </div>
+                            <div class="mb-3">
+                                <input type="number" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
+                            </div>
+                            <div class="mb-3">
+                                <button onclick="updateTable()" type="submit"
+                                    class="btn btn-primary mb-3">Hesapla</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
-<div id='calendar'></div>
             </div>
+            <div id='calendar'></div>
         </div>
     </div>
+
     <script>
         function updateTable() {
             const startDateInput = document.getElementById('startDate');
             const startDate = new Date(startDateInput.value);
-
-            var daysInput = parseInt(document.getElementById('daysInput').value);
-            const table = document.getElementById('dataTable');
+            const daysInput = parseInt(document.getElementById('daysInput').value);
             const resultLabel = document.getElementById('resultLabel');
-
-            while (table.rows.length > 1) {
-                table.deleteRow(1);
-            }
-
+            let formattedDate2 = '';
+            let formattedStartDate2 = '';
             for (let i = 1; i <= daysInput; i++) {
                 const currentDate = new Date(startDate);
                 currentDate.setDate(startDate.getDate() + i - 1);
@@ -124,43 +70,101 @@ function addEvent() {
                 const year = currentDate.getFullYear();
                 const formattedDate = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
 
-                const row = document.createElement('tr');
-                const dayCell = document.createElement('td');
-                const dateCell = document.createElement('td');
 
-                dayCell.textContent = i;
-                dateCell.textContent = formattedDate;
                 if (i === daysInput) {
+                    currentDate.setDate(currentDate.getDate() + 1);
+                    const nextDay = currentDate.getDate();
+                    const nextMonth = currentDate.getMonth() + 1;
+                    const nextYear = currentDate.getFullYear();
+                    formattedDate2 = `${nextYear}-${nextMonth < 10 ? '0' + nextMonth : nextMonth}-${nextDay < 10 ? '0' + nextDay : nextDay}`;
+                    console.log(formattedDate2);
+
+
                     const startDate = new Date(currentDate);
                     startDate.setDate(startDate.getDate() + 1);
                     const startDay = startDate.getDate();
                     const startMonth = startDate.getMonth() + 1;
                     const startYear = startDate.getFullYear();
-                    const formattedStartDate = `${startDay < 10 ? '0' + startDay : startDay}.${startMonth < 10 ? '0' + startMonth : startMonth}.${startYear}`;
-                  
+                    formattedStartDate = `${startDay < 10 ? '0' + startDay : startDay}.${startMonth < 10 ? '0' + startMonth : startMonth}.${startYear}`;
+                    formattedStartDate2 = `${startYear}-${startMonth < 10 ? '0' + startMonth : startMonth}-${startDay < 10 ? '0' + startDay : startDay}`;
+
                     const resultText = document.createTextNode(`Göreve Başlama Tarihiniz: ${formattedStartDate}`);
                     resultLabel.textContent = '';
                     resultLabel.appendChild(resultText);
                 }
-                row.appendChild(dayCell);
-                row.appendChild(dateCell);
-                table.appendChild(row);
             }
+
+            console.log(startDateInput.value);
+
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'tr',
+                firstDay: 1,
+                contentHeight: 450,
+                headerToolbar: {
+                    start: 'prev',
+                    center: 'title',
+                    end: 'next'
+                },
+                events: [
+                    {
+                        title: 'Yıllık İzin',
+                        start: startDateInput.value,
+                        end: formattedStartDate2 + 'T00:00:00'
+                    },
+                    {
+                        title: 'Göreve Başlama',
+                        start: formattedStartDate2,
+                        backgroundColor: 'red'
+                    },
+                    {
+                        title: "Yılbaşı",
+                        start: "2023-01-01"
+                    },
+                    {
+                        title: "Ulusal Egemenlik ve Çocuk Bayramı",
+                        start: "2023-04-23"
+                    },
+                    {
+                        title: "Emek ve Dayanışma Günü",
+                        start: "2023-05-01"
+                    },
+                    {
+                        title: "Atatürk'ü Anma, Gençlik ve Spor Bayramı",
+                        start: "2023-05-19"
+                    },
+                    {
+                        title: "Demokrasi ve Milli Birlik Günü",
+                        start: "2023-07-15"
+                    },
+                    {
+                        title: "Zafer Bayramı",
+                        start: "2023-08-30"
+                    },
+                    {
+                        title: "Cumhuriyet Bayramı",
+                        start: "2023-10-29"
+                    },
+                    {
+                        title: "Yılbaşı",
+                        start: "2023-12-31"
+                    }
+                ]
+            });
+
+            calendar.render();
         }
-
-
-addEvent();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
-        crossorigin="anonymous">      
-    </script>
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
+        </script>
     <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag() { dataLayer.push(arguments); }
-                    gtag('js', new Date());
-
-                    gtag('config', 'G-DWJSM9FJ7L');
-    </script>   
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-DWJSM9FJ7L');
+    </script>
 </body>
+
 </html>

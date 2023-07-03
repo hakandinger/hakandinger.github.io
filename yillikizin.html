@@ -116,6 +116,11 @@
                     center: 'title',
                     end: 'next'
                 },
+                
+                initialDate:startDateInput.value,   
+ 
+                eventClick: function(info) {
+                 alert('Event: ' + info.event.title);},
                 events: [
                     {
                         title: 'Yıllık İzin',

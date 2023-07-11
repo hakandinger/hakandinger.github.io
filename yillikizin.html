@@ -1,12 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-<style>
-body{
-background-image: url('../images/bg.jpg'); background-repeat:no-repeat;
-backgruond-attachment:fixed;
-background-size: auto;}   </style>
- <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWJSM9FJ7L"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -15,101 +11,81 @@ background-size: auto;}   </style>
 
         gtag('config', 'G-DWJSM9FJ7L');
     </script>
-    <title>Yıllık İzin</title>
+
+    <title>Günlük Çizelge Hazırlayıcı</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
-
+        @import url('https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;600;900&display=swap');
         body {
-            font-family: 'Chakra Petch', sans-serif;        }
+            font-family: 'Mulish', cursive;
+        }
     </style>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales-all.global.js'></script>   
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales-all.global.js'></script>
 </head>
 
 <body>
-    
-    <div class="container-fluid">
+    <div class="bg-image" style="background-image: url('../images/bg.jpg');
+           height: 100vh">
         <div class="container text-center p-3">
-            <div class="row align-items-center mt-5 p-3">
-                <h1>Yıllık İzin Hesaplama Robotu</h1>
+            <div class="row align-items-center p-3">
+                <h1>Sevgili Meslektaşım Sayfamıza Hoş Geldin İzin Günlerini Kolayca Planlaman İçin Bu
+                    Sayfaları Hazırladım.</h1>
                 <hr class="border border-primary border-3 opacity-75">
-                <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-4">
-                    <label id="resultLabel"> İzin Başlangıç tarihinizi ve İzin Gün Sayınızı Seçiniz!</label>
-                </div>
             </div>
             <div class="row align-items-end">
+
                 <div class="col">
                     <div class="d-grid gap-2 col-6 mx-auto">
-                        <form class="row g-3" onsubmit="event.preventDefault(); ">
-                            <div class="mb-3">
-                                <div class="form-floating">
-                                    <input type="date" class="form-control" id="startDate">
-                                    <label>İzin Başlangıç Tarihi</label>
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                <input type="number" class="form-control" id="daysInput" placeholder="İzin Gün Sayısı">
-                            </div>
-                            <div class="mb-3">
-                                <button onclick="updateTable()" type="submit"
-                                    class="btn btn-primary mb-3">Hesapla</button>
-                            </div>
-                        </form>
+                        <button onclick="ikiartibir()" type="button" class="btn btn-outline-success btn-block">3 Gruplu
+                            2+1 Çalışma
+                            Takvimi</button>
+                        <button type="button" class="btn btn-outline-success btn-block">8/24 Çalışma Takvimi</button>
+
                     </div>
+
+
                 </div>
+                <div class="col">
+                    <div class="d-grid gap-2 col-6 mx-auto">
+
+                        <button onclick="onikiotuzalti()" type="button" class="btn btn-outline-success btn-block">3
+                            Gruplu 12/36
+                            Çalışma Takvimi</button>
+                        <button onclick="yillikizin()" type="button" class="btn btn-outline-success btn-block">Yıllık
+                            İzin Günü
+                            Hesaplama</button>
+                    </div>
+
+                </div>
+
             </div>
-            <div id='calendar'></div>
+            <div class="row align-items-center mt-5 p-3">
+                <div id='calendar'></div>
+            </div>
         </div>
     </div>
-</div>
     <script>
-        function updateTable() {
-            const startDateInput = document.getElementById('startDate');
-            const startDate = new Date(startDateInput.value);
-            const daysInput = parseInt(document.getElementById('daysInput').value);
-            const resultLabel = document.getElementById('resultLabel');
-            let formattedDate2 = '';
-            let formattedStartDate2 = '';
-            for (let i = 1; i <= daysInput; i++) {
-                const currentDate = new Date(startDate);
-                currentDate.setDate(startDate.getDate() + i - 1);
-                const day = currentDate.getDate();
-                const month = currentDate.getMonth() + 1;
-                const year = currentDate.getFullYear();
-                const formattedDate = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+        function ikiartibir() {
+            window.open("ikiartibir.html");
+        }
 
-
-                if (i === daysInput) {
-                    currentDate.setDate(currentDate.getDate() );
-                    const nextDay = currentDate.getDate();
-                    const nextMonth = currentDate.getMonth() + 1;
-                    const nextYear = currentDate.getFullYear();
-                    formattedDate2 = `${nextYear}-${nextMonth < 10 ? '0' + nextMonth : nextMonth}-${nextDay < 10 ? '0' + nextDay : nextDay}`;
-                    console.log(formattedDate2);
-
-
-                    const startDate = new Date(currentDate);
-                    startDate.setDate(startDate.getDate() + 1);
-                    const startDay = startDate.getDate();
-                    const startMonth = startDate.getMonth() + 1;
-                    const startYear = startDate.getFullYear();
-                    formattedStartDate = `${startDay < 10 ? '0' + startDay : startDay}.${startMonth < 10 ? '0' + startMonth : startMonth}.${startYear}`;
-                    formattedStartDate2 = `${startYear}-${startMonth < 10 ? '0' + startMonth : startMonth}-${startDay < 10 ? '0' + startDay : startDay}`;
-
-                    const resultText = document.createTextNode(`Göreve Başlama Tarihiniz: ${formattedStartDate}`);
-                    resultLabel.textContent = '';
-                    resultLabel.appendChild(resultText);
-                }
-            }
-
-            console.log(startDateInput.value);
-
+        function onikiotuzalti() {
+            window.open("onikiotuzalti.html");
+        }
+        function yillikizin() {
+            window.open("yillikizin.html");
+        }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
             var calendarEl = document.getElementById('calendar');
+
             var calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
                 locale: 'tr',
@@ -120,22 +96,8 @@ background-size: auto;}   </style>
                     center: 'title',
                     end: 'next'
                 },
-                
-                initialDate:startDateInput.value,   
- 
-                eventClick: function(info) {
-                 alert('Event: ' + info.event.title);},
                 events: [
-                    {
-                        title: 'Yıllık İzin',
-                        start: startDateInput.value,
-                        end: formattedStartDate2
-                    },
-                    {
-                        title: 'Göreve Başlama',
-                        start: formattedStartDate2,
-                        backgroundColor: 'red'
-                    },
+
                     {
                         title: "Yılbaşı",
                         start: "2023-01-01"
@@ -168,16 +130,17 @@ background-size: auto;}   </style>
                         title: "Yılbaşı",
                         start: "2023-12-31"
                     }
-                ]
+                ],
+                editable: true,
+                selectable: true
             });
 
             calendar.render();
-        }
+        });
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous">
-        </script>
-    
+
+
+
 </body>
 
 </html>

@@ -1,7 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<!-- Google tag (gtag.js) -->
+    <style>
+        body {
+            background-image: url('../images/bg.jpg');
+            background-repeat: no-repeat;
+            backgruond-attachment: fixed;
+            background-size: auto;
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWJSM9FJ7L"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -10,185 +19,131 @@
 
         gtag('config', 'G-DWJSM9FJ7L');
     </script>
-  <title>Çalışma ve İstirahat Günleri</title>
-  <meta charset="UTF-8">
-  <style>
+    <title>Yıllık İzin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
-    @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
-    
-    body{
-      background-color:#cdcccd;
-      background-image: url('../images/bg2.jpg');
-        background-repeat:no-repeat;
-        background-position:center 80%;
-    }
-    
-
-    .container {
-      font-family: 'Kalam', cursive;
-      text-align:center; 
-      position: absolute;
-      top:0; 
-      left:0; 
-      width:100%; 
-      height: 100%;
-      
-      
-      
-    }
-
-    .container2 {
-      
-      display:inline; 
-      text-align:center; 
-      width:90%; 
-      height:auto; 
-      margin:5% 5%;
-    }
-
-    .container_element {
-        text-align: center;
-        display: block;
-        width: 100%;
-        font-size: 24px;
-        margin-top: 80px;
-        margin-bottom: 60px;
-        font-weight: bold;
-    }
-    
-    .input {
-      margin:0 5%;
-      padding:20px;
-      max-width:500px;
-      width:90%;
-      height:50px;
-    }
-
-    .submit {
-      font-size:24px; 
-      margin:30px 5%; 
-      width:90%; 
-      max-width:500px; 
-      height:50px;
-    }
-
-    table {
-      
-      border-collapse: collapse;
-      width: 100%;
-    }
-    
-    th, td {
-      border: 1px solid black;
-      padding: 8px;
-      text-align: left;
-    }
-    
-    .footer {
-      font-size: 10px;
-      font-family: arial;
-      
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      text-align: center;
-    
-    }
-    @media only screen and (max-width: 1024px) {
-
-      .input {
-        font-size:40px; 
-        max-width:90%;
-        height:100px;
-        margin:0;
-      }
-
-      .submit {
-        font-size:40px; 
-        max-width:90%; 
-        height:100px;
-      }
-
-      .container_element {
-        font-size:40px; 
-      }
-
-      
-
-      .footer {
-        font-size:24px; 
-      }	
-
-    }
-
-  </style>
-  <script>
-    function calculateWorkingDays(startDate, endDate) {
-      var currentDate = new Date(startDate);
-      var end = new Date(endDate);
-      var dayCount = 1;
-      var table = "<table><tr><th>Tarih</th><th>Gün Durumu</th></tr>";
-      
-      while (currentDate <= end) {
-        var dayOfWeek = currentDate.getDay();
-        var dayStatus = (dayCount % 3 !== 0) ? "Görev" : "İstirahat";
-        
-        if (dayCount % 3 === 2) {
-          dayStatus = "Destek";
+        body {
+            font-family: 'Comfortaa', cursive;
         }
-        
-        table += "<tr><td>" +currentDate.toLocaleDateString("tr-TR")+" - " +currentDate.toLocaleDateString("tr-TR", {weekday:"long"}) + "</td><td>" + dayStatus + "</td></tr>";
-        
-        currentDate.setDate(currentDate.getDate() + 1);
-        dayCount++;
-      }
-      
-      table += "</table>";
-      document.getElementById("result").innerHTML = table;
-    }
-    
-    function calculateDays() {
-      var startDate = document.getElementById("startDate").value;
-      var endDate = document.getElementById("endDate").value;
-      
-      calculateWorkingDays(startDate, endDate);
-    }
-  </script>
+    </style>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales-all.global.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-  <div class="container">
-  <div  class="container2">
+    <div class="container-fluid">
+        <div class="container text-center p-3">
+            <div class="row align-items-center p-3">
+                <p>2+1 Çalışma Sistemi</p>
+                <p>Görev, Destek ve İstirahat Günleri</p>
+            </div>
 
-      <div class="container_element">
-        <p>2+1 Çalışma Sistemi</p>
-      
-        <p>Görev, Destek ve İstirahat Günleri</p>
-      </div>   
+            <div class="row justify-content-center">
 
-      
-        <p> Başlangıç Tarihi </p>  
-        <input type="date"  id="startDate" class="input">
-        <br>
-        <p> Bitiş Tarihi </p>
-        <input type="date" id="endDate" class="input">
-        <br>
-        <button onclick="calculateDays()" class="submit">Hesapla</button>
-        <p>! Seçilen tarih istirahat sonrası ilk çalışma gününden saymaya başlar. - Görev - Destek - İstirahat </p>
-      
-      
+                <div class="col-5">
+                    <form class="row g-3" onsubmit="event.preventDefault(); ">
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="startDate">
+                                <label>Başlangıç Tarihi </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="endDate">
+                                <label>Bitiş Tarihi </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button onclick="calculateDays()" type="submit"
+                                class="btn btn-primary mb-3">Hesapla</button>
+                        </div>
+                    </form>
+                    
+                    
+
+                </div>
+
+            </div>
+            <div class="row align-items-center p-3">
+                <p>! Seçilen tarih istirahat sonrası ilk çalışma gününden saymaya başlar.</p>
+                <p> - Görev - Destek - İstirahat</p> </div>
+
+
+            <div id='calendar'></div>
+            <div id="result"></div>
+            <div class="row justify-content-center">
+                <p>2023 Ahmet Hakan Dinger</p>
+            </div>
+        </div>
         
-            
-      <div id="result"></div>
+
     </div>
-    <div class="footer">
-      <p>2023 Ahmet Hakan Dinger</p>
-    </div>
-     
-  </div>
-  
-  
-	
-  
+    <script>
+        function calculateDays() {
+            var startDate = document.getElementById("startDate").value;
+            var endDate = document.getElementById("endDate").value;
+            calculateWorkingDays(startDate, endDate);
+        }
+
+        function calculateWorkingDays(startDate, endDate) {
+            var currentDate = new Date(startDate);
+            var end = new Date(endDate);
+            var events = []; // FullCalendar etkinliklerini saklamak için boş bir dizi
+            var dayCount = 1;
+
+            while (currentDate <= end) {
+                var dayOfWeek = currentDate.getDay();
+                var dayStatus = (dayCount % 3 !== 0) ? "Görev" : "İstirahat";
+                var backgroundColor = (dayStatus === "İstirahat") ? "green" : ""; // İstirahat günleri yeşil renkte olacak
+                if (dayCount % 3 === 2) {
+                    dayStatus = "Destek";
+                }
+
+                events.push({
+                    title: dayStatus,
+                    start: currentDate.toISOString().split('T')[0], // ISO formatında tarih kullanmak gerekiyor
+                    allDay: true,
+                    backgroundColor: backgroundColor
+                });
+
+                currentDate.setDate(currentDate.getDate() + 1);
+                dayCount++;
+            }
+
+            // FullCalendar'ı etkinliklerle güncelle
+            var calendar = document.getElementById('calendar');
+            var fullCalendar = new FullCalendar.Calendar(calendar, {
+                initialView: 'dayGridMonth',
+                locale: 'tr',
+                firstDay: 1,
+                contentHeight: 450,
+                headerToolbar: {
+                    start: 'prev',
+                    center: 'title',
+                    end: 'next'
+                },
+                eventClick: function (info) {
+                    alert('Event: ' + info.event.title);
+                },
+                events: events
+            });
+
+            fullCalendar.render();
+        }
+    </script>
+
+
+
+
+
 </body>
 
 </html>

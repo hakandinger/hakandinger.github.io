@@ -1,211 +1,144 @@
 <!DOCTYPE html>
 <html>
-
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            background-color: rgb(124, 183, 231);
+        }
+    </style>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-DWJSM9FJ7L"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
         gtag('js', new Date());
-
         gtag('config', 'G-DWJSM9FJ7L');
     </script>
-    <title>15 Günlük Çizelge</title>
+    <script language="JavaScript">
+
+        var titlemsg = " ÜÇ GRUPLU 12/36 ÇALIŞMA SİSTEMİ ";
+        var speed = 200;
+
+        function scroll_title() {
+            document.title = titlemsg;
+            titlemsg = titlemsg.substring(1, titlemsg.length) + titlemsg.charAt(0);
+            setTimeout("scroll_title()", speed);
+        }
+        scroll_title();
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&family=Comfortaa:wght@300;400;500;600;700&display=swap');
 
         body {
-            font-family: 'Kalam', cursive;
-            background-color: #cdcccd;
-            background-image: url(bg.jpg);
-            background-repeat: no-repeat;
-            background-position: center 80%;
-        }
-
-        .container {
-            text-align: center;
-            display: block;
-            width: 100%;
-            font-size: 24px;
-            margin-top: 80px;
-            margin-bottom: 60px;
-            font-weight: bold;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-
-        td {
-            text-align: center;
-            border: 1px solid black;
-            padding: 8px;
-        }
-
-        .input {
-            text-align: center;
-            margin: 0 5%;
-            padding: 20px;
-            max-width: 500px;
-            width: 90%;
-            height: 50px;
-        }
-
-        .submit {
-            text-align: center;
-            font-size: 24px;
-            margin: 30px 5%;
-            width: 90%;
-            max-width: 500px;
-            height: 50px;
-        }
-
-        
-
-        @media only screen and (max-width: 1024px) {
-            
-
-            .input {
-                font-size: 40px;
-                max-width: 90%;
-                height: 100px;
-                margin: 0;
-            }
-
-            .submit {
-                font-size: 40px;
-                max-width: 90%;
-                height: 100px;
-            }
+            font-family: 'Comfortaa', cursive;
         }
     </style>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid@6.1.8/index.global.min.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/@fullcalendar/core/locales-all.global.js'></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
-
 <body>
-
-    <div class="container">
-        <p>Başlangıç Tarihi</p>
-        <input type="date" id="startDate" class="input">
-        <br>
-        <button onclick="updateTable()" class="submit">Hesapla</button>
-        <br>
-        <p>Başlangıç Tarihinden itibaren 15 günlük bir tablo hazırlamaktadır!</p>
-        <br>
-        <button onclick="downloadTable()" class="submit">Tabloyu İndir</button>
-        <br>
-    </div>
-    <table id="dataTable">
-        <tr>
-            <th>Gün</th>
-            <th>Tarih</th>
-            <th>1. Grup</th>
-            <th>2. Grup</th>
-            <th>3. Grup</th>
-        </tr>
-    </table>
-        <!-- Günlerin tekrarlanan satırları -->
+    <div class="container-fluid">
+        <div class="container text-center p-3">
+            <div class="row align-items-center p-3">
+                <p>3 Gruplu 12/36 Çalışma Sistemi</p>
+                <p>Görev, Destek ve İstirahat Günleri</p>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-5">
+                    <form class="row g-3" onsubmit="event.preventDefault(); ">
+                        <div class="mb-3">
+                            <div class="form-floating">
+                                <input type="date" class="form-control" id="startDate">
+                                <label>Başlangıç Tarihi </label>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button onclick="calculateDays()" type="submit"
+                                class="btn btn-primary mb-3">Hesapla</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row align-items-center p-3">
+                <p>Başlangıç Tarihinden itibaren 15 günlük bir tablo hazırlamaktadır!</p>
+                <div id='calendar'></div>
+                <div id="result"></div>
+                <div class="row justify-content-center">
+                    <p>2023 Ahmet Hakan Dinger</p>
+                </div>
+            </div>
+        </div>
         <script>
-            function updateTable() {
+            function calculateDays() {
                 const startDateInput = document.getElementById('startDate');
                 const startDate = new Date(startDateInput.value);
-                const table = document.querySelector('table');
-
-                
-                while (table.rows.length > 1) {
-                    table.deleteRow(1);
-                }
-
+                calculateWorkingDays(startDate);
+            }
+            function calculateWorkingDays(startDate) {
+                var currentDate = new Date(startDate);
+                var events = [];
                 for (let i = 1; i <= 15; i++) {
                     const currentDate = new Date(startDate);
                     currentDate.setDate(startDate.getDate() + i - 1);
                     const day = currentDate.getDate();
                     const month = currentDate.getMonth() + 1;
                     const year = currentDate.getFullYear();
-                    const formattedDate = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+                    const formattedDate = `${year}-${month < 10 ? '0' + month : month}-${day < 10 ? '0' + day : day}`;
+                    console.log(i)
+                    function getDayStatus(i) {
+                        if (i <= 5) {
+                            if (i % 7 === 1 || i % 7 === 2 || i % 7 === 3 || i % 7 === 4 || i % 7 === 5) {
 
-                    const row = document.createElement('tr');
-                    const dayCell = document.createElement('td');
-                    const dateCell = document.createElement('td');
-                    const group1Cell = document.createElement('td');
-                    const group2Cell = document.createElement('td');
-                    const group3Cell = document.createElement('td');
-
-                    dayCell.textContent = i;
-                    dateCell.textContent = formattedDate;
-
-                    if (i <= 5) {
-                        if (i % 7 === 1 || i % 7 === 2 || i % 7 === 3 || i % 7 === 4 || i % 7 === 5) {
-                            group1Cell.textContent = '08:00-20:00';
+                                return "08:00-20:00";
+                            } else {
+                                return "20:00-08:00";
+                            }
+                        } else if (i >= 6 && i <= 15) {
+                            if ((i - 6) % 2 === 0) {
+                                return "20:00-08:00";
+                            } else {
+                                return "İstirahat";
+                            }
                         } else {
-                            group1Cell.textContent = '20:00-08:00';
-                        }
-                    } else if (i >= 6 && i <= 15) {
-                        if ((i - 6) % 2 === 0) {
-                            group1Cell.textContent = '20:00-08:00';
-                        } else {
-                            group1Cell.textContent = 'İstirahat';
+                            return "İstirahat";
                         }
                     }
-
-                    if (i % 5 === 1 || i % 5 === 3 || i % 5 === 0) {
-                        group2Cell.textContent = 'İstirahat';
-                    } else {
-                        group2Cell.textContent = '20:00-08:00';
+                    const days = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+                    const dayStatuses = days.map(day => getDayStatus(day));
+                    var backgroundColor = (dayStatuses[i - 1] === "İstirahat") ? "red" :
+                        (dayStatuses[i - 1] === "08:00-20:00") ? "orange" : "";
+                    events.push({
+                        title: dayStatuses[i - 1],
+                        start: formattedDate,
+                        allDay: true,
+                        backgroundColor: backgroundColor
                     }
-                    if (i >= 6 && i <= 10) {
-                        group2Cell.textContent = '08:00-20:00';
-                    }
-
-                    if (i <= 10) {
-                        if ((i - 10) % 2 === 0) {
-                            group3Cell.textContent = 'İstirahat';
-                        } else {
-                            group3Cell.textContent = '20:00-08:00';
-                        }
-                    }
-                    if (i > 10 && i <= 15) {
-                        group3Cell.textContent = '08:00-20:00';
-                    }
-
-                    row.appendChild(dayCell);
-                    row.appendChild(dateCell);
-                    row.appendChild(group1Cell);
-                    row.appendChild(group2Cell);
-                    row.appendChild(group3Cell);
-
-                    table.appendChild(row);
+                    );
                 }
+                var calendar = document.getElementById('calendar');
+                var fullCalendar = new FullCalendar.Calendar(calendar, {
+                    initialView: 'dayGridMonth',
+                    locale: 'tr',
+                    firstDay: 1,
+                    contentHeight: 450,
+                    headerToolbar: {
+                        start: 'prev',
+                        center: 'title',
+                        end: 'next'
+                    },
+                    eventClick: function (info) {
+                        alert('Event: ' + info.event.title);
+                    },
+                    events: events
+                });
+                fullCalendar.render();
             }
-            function downloadTable() {
-            const table = document.getElementById('dataTable');
-            const rows = table.querySelectorAll('tr');
-            let csvContent = '';
-
-            for (const row of rows) {
-                const cells = row.querySelectorAll('th, td');
-                const cellData = Array.from(cells).map(cell => cell.textContent);
-                const csvRow = cellData.join(',');
-                csvContent += csvRow + '\n';
-            }
-
-            const blob = new Blob([csvContent], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'onikiotuzaltı.csv';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
         </script>
-    
 </body>
-
 </html>
